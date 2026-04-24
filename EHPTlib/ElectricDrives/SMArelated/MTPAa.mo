@@ -1,14 +1,13 @@
-﻿within EHPTlib.ElectricDrives.SMArelated;
+within EHPTlib.ElectricDrives.SMArelated;
 model MTPAa "MTPA logic for a generic (anisotropic) machine"
-  // Non-Ascii Symbol to cause UTF-8 saving by Dymola: €
-  parameter Modelica.Units.SI.Current Ipm=1.5 "Permanent magnet current";
+   parameter Modelica.Units.SI.Current Ipm "Permanent magnet current";
   parameter Integer pp = 1 "Pole pairs";
-  parameter Modelica.Units.SI.Resistance Rs=0.02 "Stator resistance";
-  parameter Modelica.Units.SI.Inductance Ld=0.4
+  parameter Modelica.Units.SI.Resistance Rs "Stator resistance";
+  parameter Modelica.Units.SI.Inductance Ld
     "Basic direct-axis inductance";
-  parameter Modelica.Units.SI.Inductance Lq=1.1
+  parameter Modelica.Units.SI.Inductance Lq
     "Basic quadrature-axis inductance";
-  parameter Modelica.Units.SI.Voltage Umax=100
+  parameter Modelica.Units.SI.Voltage Umax
     "Max rms voltage per phase to the motor";
 protected
   parameter Modelica.Units.SI.Voltage UmaxPk=sqrt(2)*Umax
@@ -107,14 +106,13 @@ if VparkFF < Ulim then
     Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = false, initialScale = 0.1,
         grid={2,2}), graphics={Text(
                 extent={{-98,-110},{102,-146}},
-                lineColor={0,0,127},
                 textString="%name"),Rectangle(
                 extent={{-100,100},{100,-100}},
-                lineColor={0,0,127},
                 fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),Text(
+                fillPattern=FillPattern.Solid,
+                lineColor={28,108,200}),
+            Text(
                 extent={{-100,26},{100,-26}},
-                lineColor={0,0,127},
                 textString="MTPAa")}),
     Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}},
     preserveAspectRatio = false, initialScale = 0.1, grid = {2, 2})));

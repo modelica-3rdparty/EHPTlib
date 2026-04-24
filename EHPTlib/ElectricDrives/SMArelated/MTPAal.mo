@@ -1,18 +1,20 @@
-﻿within EHPTlib.ElectricDrives.SMArelated;
+within EHPTlib.ElectricDrives.SMArelated;
 model MTPAal
   "MTPA logic for an anisotropic PMSM machine with current limitation"
-  // Non-Ascii Symbol to cause UTF-8 saving by Dymola: €
-  parameter Real gain(unit = "N.m/A") = 5000 / (1.5 * Ipm * pp) "Current loop gain";
-  parameter Modelica.Units.SI.Current Ipm=1.5 "Permanent magnet current";
+   // parameter Real gain(unit = "N.m/A") = 5000 / (1.5 * Ipm * pp) "Current loop gain";
+  // The following default for gain corresponds to 100 p.u.: 100 is multiplied
+  // by something near to the nominal torque divided by nominal current
+  parameter Real gain(unit = "N.m/A") = 10 * (1.5 * Ipm *Lq* pp) "Current loop gain";
+  parameter Modelica.Units.SI.Current Ipm "Permanent magnet current";
   parameter Integer pp = 1 "Pole pairs";
-  parameter Modelica.Units.SI.Resistance Rs=0.02 "Stator resistance";
-  parameter Modelica.Units.SI.Inductance Ld=0.4
+  parameter Modelica.Units.SI.Resistance Rs "Stator resistance";
+  parameter Modelica.Units.SI.Inductance Ld
     "Basic direct-axis inductance";
-  parameter Modelica.Units.SI.Inductance Lq=1.1
+  parameter Modelica.Units.SI.Inductance Lq
     "Basic quadrature-axis inductance";
-  parameter Modelica.Units.SI.Voltage Umax=100
+  parameter Modelica.Units.SI.Voltage Umax
     "Max rms voltage per phase to the motor";
-  parameter Modelica.Units.SI.Current Ilim=100
+  parameter Modelica.Units.SI.Current Ilim
     "nominal current (rms per phase)";
   Modelica.Blocks.Interfaces.RealInput torqueReq annotation (
     Placement(transformation(extent = {{-140, 40}, {-100, 80}}), iconTransformation(extent = {{-140, 40}, {-100, 80}})));
@@ -36,8 +38,9 @@ model MTPAal
     Placement(visible = true, transformation(extent = {{38, 14}, {58, 34}}, rotation = 0)));
   Modelica.Blocks.Sources.Constant Ilim_(k = IlimPk) annotation (
     Placement(visible = true, transformation(origin = {48, 0}, extent = {{10, -10}, {-10, 10}}, rotation = -90)));
-  Modelica.Blocks.Continuous.FirstOrder firstOrder(T = 0.01, k = gain) annotation (
-    Placement(visible = true, transformation(extent = {{60, 50}, {40, 70}}, rotation = 0)));
+  Modelica.Blocks.Continuous.FirstOrder firstOrderWithGain(T=0.01, k=gain)
+    annotation (Placement(visible=true, transformation(extent={{60,50},{40,70}},
+          rotation=0)));
   Modelica.Blocks.Nonlinear.Limiter limiter1(uMax = 1e99, uMin = 0) annotation (
     Placement(visible = true, transformation(origin = {6, 60}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Add add1(k1 = -1) annotation (
@@ -60,10 +63,10 @@ equation
     Line(points = {{-34, -3}, {-34, -20}, {4, -20}}, color = {0, 0, 127}));
   connect(limiter1.y, add1.u1) annotation (
     Line(points = {{-5, 60}, {-28, 60}, {-28, 20}}, color = {0, 0, 127}));
-  connect(firstOrder.y, limiter1.u) annotation (
-    Line(points = {{39, 60}, {18, 60}}, color = {0, 0, 127}));
-  connect(firstOrder.u, feedback.y) annotation (
-    Line(points = {{62, 60}, {72, 60}, {72, 24}, {57, 24}}, color = {0, 0, 127}));
+  connect(firstOrderWithGain.y, limiter1.u)
+    annotation (Line(points={{39,60},{18,60}}, color={0,0,127}));
+  connect(firstOrderWithGain.u, feedback.y) annotation (Line(points={{62,60},{72,
+          60},{72,24},{57,24}}, color={0,0,127}));
   connect(feedback.u1, mTPAa.Ipark) annotation (
     Line(points = {{40, 24}, {16, 24}, {16, -15}}, color = {0, 0, 127}));
   connect(Ilim_.y, feedback.u2) annotation (
@@ -85,5 +88,8 @@ equation
     FillPattern.Solid), Text(extent = {{-100, 24}, {100, -26}},
     lineColor = {0, 0, 127}, textString = "MTPAal")}),
     Diagram(coordinateSystem(extent = {{-100, -80}, {100, 80}},
-    preserveAspectRatio = false)));
+    preserveAspectRatio = false)),
+    Documentation(info="<html>
+<p><span style=\"font-size: 9pt;\">Current limitation is implemented as a proportional-only feedback control (whose gain is inside firstOrderWithGain) of current on torque request. The first-order block simulates the control delay and allows avoiding an algebraic loop.</span></p>
+</html>"));
 end MTPAal;

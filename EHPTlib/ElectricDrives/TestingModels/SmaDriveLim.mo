@@ -39,7 +39,8 @@ model SmaDriveLim
     pp=smpm1.p,
     Rs=smpm1.Rs,
     Ld=smpm1.Lmd,
-    Lq=smpm1.Lmq) annotation (Placement(visible=true, transformation(extent={{-50,
+    Lq=smpm1.Lmq,
+    Ilim=100)     annotation (Placement(visible=true, transformation(extent={{-50,
             136},{-30,156}}, rotation=0)));
   Modelica.Blocks.Continuous.FirstOrder firstOrder1[3](T = 0.2e-4 * {1, 1, 1}) annotation (
     Placement(visible = true, transformation(origin = {16, 146}, extent = {{-8, -8}, {8, 8}}, rotation = 0)));
