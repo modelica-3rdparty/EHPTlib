@@ -19,8 +19,8 @@ public
     Placement(visible = true, transformation(extent = {{-80, -10}, {-60, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback feedback annotation (
     Placement(visible = true, transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  SupportModels.Miscellaneous.Gain gain(k = k) annotation (
-    Placement(visible = true, transformation(extent = {{14, -10}, {34, 10}}, rotation = 0)));
+  GainUnit gain(k=k) annotation (Placement(visible=true, transformation(extent=
+            {{14,-10},{34,10}}, rotation=0)));
   Modelica.Blocks.Nonlinear.Limiter limAcc(uMax = yMax, uMin = 0) annotation (
     Placement(visible = true, transformation(origin = {2, 40}, extent = {{52, -10}, {72, 10}}, rotation = 0)));
   Modelica.Blocks.Nonlinear.Limiter limBrak(uMax = 0, uMin = -yMax) annotation (
