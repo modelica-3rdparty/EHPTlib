@@ -40,7 +40,9 @@ model MTPAalExperimental
     Placement(visible = true, transformation(extent = {{-74, 50}, {-54, 70}}, rotation = 0)));
   Modelica.Blocks.Logical.GreaterThreshold limiting(threshold = IlimPk/1e6) annotation (
     Placement(visible = true, transformation(extent = {{-14, 18}, {6, 38}}, rotation = 0)));
-  EHPTlib.SupportModels.Miscellaneous.PIunit pi(T = integTime, k = gain) annotation (
+//  EHPTlib.SupportModels.Miscellaneous.PIunit pi(T = integTime, k = gain) annotation (
+//    Placement(visible = true, transformation(origin = {48, 60}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+  Modelica.Blocks.Continuous.PI pi(T = integTime, k = gain,y(unit="N.m")) annotation (
     Placement(visible = true, transformation(origin = {48, 60}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
 protected
   parameter Modelica.Units.SI.Current IlimPk = sqrt(2)*Ilim "current limit (A peak)";
@@ -79,8 +81,7 @@ equation
           textColor={238,46,47},
           textString="experimental")}),
     Diagram(coordinateSystem(extent = {{-100, -80}, {100, 80}}, preserveAspectRatio = false)),
-    Documentation(info="<html>
-<p><span style=\"font-size: 12pt;\">This is an experimental version used only for SmaALlSpeeds. 
-Operation of PI controller not well calibrated for all applications, since it lacks antiwindup.</span></p>
-</html>"));
+    Documentation(info= "<html><head></head><body><p><span style=\"font-size: 12pt;\">This is an experimental version used only for SmaALlSpeeds. 
+Operation of PI controller not well calibrated for all applications, since it lacks antiwindup.</span></p><p><span style=\"font-size: 12pt;\">--------------------</span></p><p><span style=\"font-size: 12pt;\"><i>A technical note on the unit of measure.</i></span></p><p><span style=\"font-size: 12pt;\">The output of block pi is correctly set as N.m through specific declaration of the unit of measure of its output.</span></p><p><span style=\"font-size: 12pt;\">The use of SupportModels.Miscellaneous.PIunit would not not allow correct propagation of unit to pi output because:</span></p><p><span style=\"font-size: 12pt;\">- Dymola infers \"J\" as the pi's output, which is consistent with N.m, but misleading</span></p><p><span style=\"font-size: 12pt;\">- OM does not determine at all the unit of pi's output</span></p>
+</body></html>"));
 end MTPAalExperimental;
