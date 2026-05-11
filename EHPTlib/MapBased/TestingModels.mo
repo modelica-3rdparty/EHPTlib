@@ -650,7 +650,7 @@ ordinate.<o:p></o:p></span></p><p class=\"MsoNormal\" style=\"margin-left: 21.3p
       Placement(transformation(origin = {18, -4}, extent = {{-10, -10}, {10, 10}})));
     Modelica.Blocks.Sources.Ramp radsPerSec(height = 200, duration = 3, offset = 20, startTime = 1) annotation(
       Placement(transformation(origin = {-58, -4}, extent = {{-10, -10}, {10, 10}})));
-    EHPTlib.SupportModels.Miscellaneous.Gain toPuSpeed(k = 60/(2*pi)) annotation(
+    EHPTlib.SupportModels.Miscellaneous.GainUnit toPuSpeed(k = 60/(2*pi)) annotation(
       Placement(transformation(origin = {-10, -4}, extent = {{8, -8}, {-8, 8}}, rotation = -180)));
   equation
     connect(fixedLimits.w, radsPerSec.y) annotation(

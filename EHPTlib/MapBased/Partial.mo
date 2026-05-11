@@ -80,11 +80,11 @@ package Partial
       Placement(transformation(extent = {{-28, 20}, {-48, 40}})));
     SupportModels.MapBasedRelated.LimTorque limTau(limitsOnFile = limitsOnFile, tauMax = tauMax, wMax = wMax, powMax = powMax, limitsFileName = limitsFileName, limitsTableName = tauLimitsMapName) annotation(
       Placement(transformation(extent = {{50, -2}, {30, 22}})));
-    SupportModels.Miscellaneous.Gain fromPuTorque(k = tlTorqueFactor_) annotation(
+    SupportModels.Miscellaneous.GainUnit fromPuTorque(k = tlTorqueFactor_) annotation(
       Placement(visible = true, transformation(origin = {14, 30}, extent = {{-6, -6}, {6, 6}}, rotation = 180)));
-    SupportModels.Miscellaneous.Gain fromPuTorque1(k = tlTorqueFactor_) annotation(
+    SupportModels.Miscellaneous.GainUnit fromPuTorque1(k = tlTorqueFactor_) annotation(
       Placement(visible = true, transformation(origin = {14, 2}, extent = {{-6, -6}, {6, 6}}, rotation = 180)));
-    SupportModels.Miscellaneous.Gain toPuSpeed(k = tlSpeedFactor_) annotation(
+    SupportModels.Miscellaneous.GainUnit toPuSpeed(k = tlSpeedFactor_) annotation(
       Placement(visible = true, transformation(origin = {68, 10}, extent = {{-8, -8}, {8, 8}}, rotation = 180)));
     SupportModels.MapBasedRelated.EfficiencyCT toElePow(mapOnFile = effMapOnFile, tauFactor=eTorqueFactor, speedFactor=eSpeedFactor, mapFileName = effMapFileName, effTableName = effTableName, effTable = effTable) if efficiencyFromTable annotation(
       Placement(transformation(extent = {{-38, -34}, {-58, -14}})));

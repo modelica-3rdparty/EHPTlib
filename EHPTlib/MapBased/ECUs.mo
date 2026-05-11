@@ -211,7 +211,7 @@ package ECUs
       Placement(transformation(origin = {0, -14}, extent = {{100, 50}, {120, 70}}), iconTransformation(extent = {{100, 50}, {120, 70}})));
     Modelica.Blocks.Math.Feedback feedback annotation(
       Placement(transformation(origin = {-22, 0}, extent = {{24, -40}, {44, -20}})));
-    SupportModels.Miscellaneous.Gain gain(k = throttlePerWerr) annotation(
+    SupportModels.Miscellaneous.GainUnit gain(k = throttlePerWerr) annotation(
       Placement(transformation(origin = {-30, 0}, extent = {{66, -40}, {86, -20}})));
     Modelica.Blocks.Nonlinear.VariableLimiter tauLimiter annotation(
       Placement(transformation(origin = {10, -14}, extent = {{62, 50}, {82, 70}})));
