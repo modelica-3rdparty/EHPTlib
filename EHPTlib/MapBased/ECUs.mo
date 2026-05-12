@@ -1,4 +1,4 @@
-﻿within EHPTlib.MapBased;
+within EHPTlib.MapBased;
 
 package ECUs
   model PsdEcu1 "Power Split hybrid power train controller, not using ON/OFF strategy"
@@ -53,7 +53,7 @@ package ECUs
     parameter Real socRef = 0.6 "Reference soc";
     parameter Real maxTorqueReq = 80 "Maximum torque that can be requested from mot";
     parameter Real powFiltT = 60 "Power filter time constant (s)";
-    parameter Real socLoopGain = 50e3 "gain of the soc loop (w/pu)";
+    parameter Modelica.Units.SI.Power socLoopGain = 50e3 "gain of the soc loop";
     parameter Real onThreshold = 7000 "average power over which engine is switched on (W)";
     parameter Real offThreshold = 5000 "average power below which engine is switched off (W)";
     Modelica.Blocks.Logical.Hysteresis hysteresis(uLow = offThreshold, uHigh = onThreshold) annotation(
