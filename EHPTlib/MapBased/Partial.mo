@@ -8,7 +8,7 @@ package Partial
     Modelica.Units.SI.Torque tauElectrical=torque.tau;
     Modelica.Units.SI.AngularVelocity wMechanical=wSensor.w;
     
-    parameter Modelica.Units.SI.MomentOfInertia J = 0.25 "Rotor's moment of inertia" annotation(
+    parameter Modelica.Units.SI.MomentOfInertia J = 0.005 "Rotor's moment of inertia" annotation(
       Dialog(group = "General parameters"));
     parameter Modelica.Units.SI.Voltage uDcNom = 100 "Nominal DC voltage" annotation(
       Dialog(group = "General parameters"));
@@ -173,7 +173,7 @@ false")}),
     parameter Modelica.Units.SI.Power powMax = 50000 "Maximum Mechanical drive power";
     parameter Modelica.Units.SI.Torque tauMax = 400 "Maximum drive Torque";
     parameter Modelica.Units.SI.AngularVelocity wMax = 650 "Maximum drive speed";
-    parameter Modelica.Units.SI.MomentOfInertia J = 0.59 "Moment of Inertia";
+    parameter Modelica.Units.SI.MomentOfInertia J = 0.04 "Moment of Inertia";
     parameter Boolean mapsOnFile = false "= true, if efficiency table is taken from a txt file" 
                              annotation(Dialog(group = "Efficiency related parameters"),choices(checkBox = true));
     parameter Real eTorqueFactor=1 "factor applied to input torque for efficiencies when they are from file"
@@ -267,21 +267,21 @@ false")}),
     import Modelica.Constants.*;
     parameter Modelica.Units.SI.AngularVelocity wIceStart = 167 annotation(
       Dialog(group = "General parameters"));
-    parameter Modelica.Units.SI.MomentOfInertia iceJ = 0.5 "ICE moment of Inertia" annotation(
+    parameter Modelica.Units.SI.MomentOfInertia iceJ = 0.15 "ICE moment of Inertia" annotation(
       Dialog(group = "General parameters"));
     parameter Boolean scMapOnFile = false "= true, if tables are taken from a txt file" annotation(
       choices(checkBox = true),
-      Dialog(group = "Consumption map related parameters"));
+      Dialog(group = "Specific consumption map related parameters"));
     parameter String mapsFileName = "NoName" "File where specific consumption matrix is stored" annotation(
       Dialog(group = "General parameters", loadSelector(filter = "Text files (*.txt)", caption = "Open file in which required tables are")));
     parameter String specConsName = "NoName" "Name of the on-file specific consumption matrix" annotation(
-      Dialog(enable = scMapOnFile, group = "Consumption map related parameters"));
+      Dialog(enable = scMapOnFile, group = "Specific consumption map related parameters"));
     parameter Real scTorqueFactor = 1 "Torque multiplier for specific consumption  map " annotation(
-      Dialog(enable = scMapOnFile, group = "Consumption map related parameters"));
+      Dialog(enable = scMapOnFile, group = "Specific consumption map related parameters"));
     parameter Real scSpeedFactor = 60/(2*pi) "Speed multiplier for specific consumption  map (see info)" annotation(
-      Dialog(enable = scMapOnFile, group = "Consumption map related parameters"));
+      Dialog(enable = scMapOnFile, group = "Specific consumption map related parameters"));
     parameter Real scConsFactor = 1 "Output multiplier for specific consumption map" annotation(
-      Dialog(enable = scMapOnFile, group = "Consumption map related parameters"));
+      Dialog(enable = scMapOnFile, group = "Specific consumption map related parameters"));
     parameter Boolean tlMapOnFile = false "= true, if tables are taken from a txt file" annotation(
       choices(checkBox = true),
       Dialog(group = "Torque limit map related parameters"));
@@ -299,7 +299,7 @@ false")}),
   */
     parameter Real specificCons[:, :](each unit = "g/(kW.h)") = [0.0,100,300,500; 0,999,999,
       999; 100,400,400,400; 300,350,245,270; 400,400,270,270] "ICE specific consumption map. First column torque, first row speed" annotation(
-      Dialog(enable = not scMapOnFile, group = "Consumption map related parameters"));
+      Dialog(enable = not scMapOnFile, group = "Specific consumption map related parameters"));
   
     Modelica.Units.SI.Torque tauGenerated = iceTau.tau;
     Modelica.Units.SI.Torque tauMechanical = -flange_a.tau;

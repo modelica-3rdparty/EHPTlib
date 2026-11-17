@@ -44,7 +44,7 @@ model SmaDriveLim
             136},{-30,156}}, rotation=0)));
   Modelica.Blocks.Continuous.FirstOrder firstOrder1[3](T = 0.2e-4 * {1, 1, 1}) annotation (
     Placement(visible = true, transformation(origin = {16, 146}, extent = {{-8, -8}, {8, 8}}, rotation = 0)));
-  Modelica.Blocks.Sources.Trapezoid tqRef(rising = 2, period = 1e6, amplitude = 180, falling = 2, startTime = 1, width = 4) annotation (
+  Modelica.Blocks.Sources.Trapezoid tqRef(y(unit="N.m"),  rising = 2, period = 1e6, amplitude = 180, falling = 2, startTime = 1, width = 4) annotation (
     Placement(transformation(extent = {{-98, 100}, {-78, 120}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque tRes(tau_nominal = -150, w_nominal(displayUnit = "rpm") = 157.07963267949) annotation (
     Placement(transformation(extent = {{116, 84}, {96, 104}})));
